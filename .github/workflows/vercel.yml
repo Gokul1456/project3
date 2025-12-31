@@ -3,10 +3,10 @@ name: Vercel CI/CD Deployment
 on:
   push:
     branches:
-      - main   # Deploy to production on main branch
+      - main   # Deploy to production on main
   pull_request:
     branches:
-      - main   # Preview deployments on PRs
+      - main   # Deploy preview builds for PRs
 
 jobs:
   deploy:
@@ -27,20 +27,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # 4. Build project
+      # 4. Build project (optional, Vercel can also build)
       - name: Build project
-        run: npm run build  # Replace with your build command if different
+        run: npm run build
 
       # 5. Deploy to Vercel
       - name: Deploy to Vercel
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
-          # Build prebuilt output for production
-          npx vercel build --prod
-          # Deploy the prebuilt build to Vercel
           npx vercel deploy \
-            --prebuilt \
             --prod \
             --yes \
             --token $VERCEL_TOKEN \
