@@ -19,12 +19,14 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build React/Vite app
         run: npm run build
 
+      - name: Pull Vercel Environment Variables
+        run: npx vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
       - name: Deploy to Vercel
-        run: |
-          npx vercel deploy --prebuilt --prod --yes \
-            --token=${{ secrets.VERCEL_TOKEN }}
+        run: npx vercel deploy --prebuilt --prod --yes \
+          --token=${{ secrets.VERCEL_TOKEN }}
