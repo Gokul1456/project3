@@ -6,15 +6,15 @@
 }
 
 .logo {
-  height: 6em;           /* Adjust the size of your Instagram logo */
+  height: 6em;
   padding: 1.5em;
   transition: transform 0.3s, filter 0.3s;
   cursor: pointer;
 }
 
 .logo:hover {
-  transform: scale(1.1); /* Slight zoom effect on hover */
-  filter: drop-shadow(0 0 2em #e1306caa); /* Instagram pink shadow */
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 2em #e1306caa); /* Instagram pink glow */
 }
 
 .card {
@@ -26,7 +26,7 @@
   margin-top: 2em;
 }
 
-/* Optional: Spin animation (if you want it for Instagram) */
+/* Optional spin animation */
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -41,4 +41,5 @@
     animation: logo-spin infinite 20s linear;
   }
 }
+
 
