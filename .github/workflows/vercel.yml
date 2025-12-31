@@ -1,28 +1,27 @@
 name: Vercel CI/CD Deployment
 
-# Trigger workflow on pushes to main branch or pull requests
 on:
   push:
     branches:
-      - main
+      - main   # Deploy to production on main branch
   pull_request:
     branches:
-      - main
+      - main   # Preview deployments on PRs
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout your repository
-      - name: Checkout repository
+      # 1. Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v3
 
-      # 2. Set up Node.js
-      - name: Setup Node.js
+      # 2. Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: '20' # Match your project Node.js version
+          node-version: '20'
 
       # 3. Install dependencies
       - name: Install dependencies
@@ -30,14 +29,20 @@ jobs:
 
       # 4. Build project
       - name: Build project
-        run: npm run build # Replace with your build script if different
+        run: npm run build  # Replace with your build command if different
 
       # 5. Deploy to Vercel
       - name: Deploy to Vercel
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
-          # Build for production prebuilt output
+          # Build prebuilt output for production
           npx vercel build --prod
-          # Deploy the prebuilt output to production
-          npx vercel deploy --prebuilt --prod --yes --token $VERCEL_TOKEN
+          # Deploy the prebuilt build to Vercel
+          npx vercel deploy \
+            --prebuilt \
+            --prod \
+            --yes \
+            --token $VERCEL_TOKEN \
+            --project my-frontend \
+            --org team_qudz2RhrZPumQEaN2IFXl6fL
