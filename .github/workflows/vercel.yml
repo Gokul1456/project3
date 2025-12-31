@@ -1,5 +1,6 @@
 name: Vercel CI/CD Deployment
 
+# Trigger the workflow on push or pull request to main branch
 on:
   push:
     branches:
@@ -13,8 +14,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository
-      - name: Checkout repo
+      # Step 1: Checkout the repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       # Step 2: Setup Node.js
@@ -35,5 +36,4 @@ jobs:
       - name: Deploy to Vercel
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-        run: npx vercel --prod --yes
-    
+        run: npx vercel --prod --yes --scope gokuls-projects-7408df39 --confirm
