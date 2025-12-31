@@ -1,5 +1,4 @@
-name: Vercel CI/CD Deployment
-
+name: Deploy to Vercel
 on:
   push:
     branches:
@@ -8,22 +7,12 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
+      - uses: actions/checkout@v3
+      - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build project
-        run: npm run build
-
+          node-version: 20
       - name: Deploy to Vercel
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
