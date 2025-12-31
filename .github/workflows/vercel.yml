@@ -28,6 +28,7 @@ jobs:
         run: npm ci
 
       # Step 4: Build project
+      - name: Build project
         run: npm run build
 
       # Step 5: Deploy to Vercel
